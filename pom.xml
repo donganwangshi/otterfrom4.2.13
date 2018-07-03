@@ -106,6 +106,17 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
+		<repository>
+			<id>elasticsearch</id>
+			<name>elasticsearch</name>
+			<url>http://maven.elasticsearch.org/releases</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
 	</repositories>
 
 	<properties>
@@ -113,8 +124,8 @@
 		<maven.test.skip>true</maven.test.skip>
 		<downloadSources>true</downloadSources>
 		<!-- compiler settings properties -->
-		<java_source_version>1.6</java_source_version>
-		<java_target_version>1.6</java_target_version>
+		<java_source_version>1.8</java_source_version>
+		<java_target_version>1.8</java_target_version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<file_encoding>UTF-8</file_encoding>
 		<spring-version>3.1.2.RELEASE</spring-version>
@@ -211,7 +222,7 @@
 				<artifactId>greenplum</artifactId>
 				<version>5.1.4</version>
 				<scope>system</scope>
-				<systemPath>D:\\projects\\otter\\lib\\greenplum.jar</systemPath>
+				<systemPath>lib/greenplum.jar</systemPath>
 			</dependency>
 			<!-- elasticsearch -->
 			<dependency>
@@ -303,7 +314,7 @@
 				<artifactId>ojdbc14</artifactId>
 				<version>10.2.0.3.0</version>
 				<scope>system</scope>
-				<systemPath>D:\\projects\\otter/lib/ojdbc14-10.2.0.3.0.jar</systemPath>
+				<systemPath>lib/ojdbc14-10.2.0.3.0.jar</systemPath>
 			</dependency>
 			<!-- spring -->
 			<dependency>
