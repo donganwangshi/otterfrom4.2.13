@@ -102,7 +102,8 @@ $control.setTemplate("home:navigation.vm")
 	  <tr> 
         <th width="300">数据源类型：</th>
         <td width="329">
-			<input type="radio" name="$canalParameterGroup.sourcingType.key" value="MYSQL" onclick="changeDisplay('mysqlSourcing','table-row');changeDisplay('oracleSourcing','none');changeDisplay('localSourcing','none');" id="RadioGroup5_0" checked="checked" class="radio"/>mysql &nbsp;
+			<input type="radio" name="$canalParameterGroup.sourcingType.key" value="MYSQL" onclick="changeDisplay('mysqlSourcing','table-row');changeDisplay('kafkaSourcing','none');changeDisplay('oracleSourcing','none');changeDisplay('localSourcing','none');" id="RadioGroup5_0" checked="checked" class="radio"/>mysql &nbsp;
+			<input type="radio" name="$canalParameterGroup.sourcingType.key" value="KAFKA" onclick="changeDisplay('mysqlSourcing','none');changeDisplay('kafkaSourcing','table-row');changeDisplay('localSourcing','none');" id="RadioGroup5_1" class="radio"/>kafka &nbsp;
 			#**
 			<input type="radio" name="$canalParameterGroup.sourcingType.key" value="ORACLE" onclick="changeDisplay('mysqlSourcing','none');changeDisplay('oracleSourcing','table-row');changeDisplay('localSourcing','none');" id="RadioGroup5_1" class="radio"/>oracle &nbsp;
             <input type="radio" name="$canalParameterGroup.sourcingType.key" value="LOCALBINLOG" onclick="changeDisplay('mysqlSourcing','none');changeDisplay('oracleSourcing','none');changeDisplay('localSourcing','table-row');" id="RadioGroup5_2" class="radio"/>localbinlog &nbsp;
@@ -161,6 +162,16 @@ $control.setTemplate("home:navigation.vm")
             <input type="text" name="$canalParameterGroup.localBinlogDirectory.key" value="$!canal.canalParameter.localBinlogDirectory.value" class="setting_input"/>
 			<br />
 			<span class="red">#addCanalMessage ($canalParameterGroup.localBinlogDirectory)</span>
+		</td>
+      </tr>
+	 
+	  
+	 <tr class="kafkaSourcing">
+        <th width="300">kafka的topic列表：</th>
+        <td width="329">
+            <input type="text" name="$canalParameterGroup.kafkaTopicList.key" value="$!canal.canalParameter.kafkaTopicList.value" class="setting_input"/><span class="red">*</span>
+			<br />
+			<span class="red">#addCanalMessage ($canalParameterGroup.kafkaTopicList)</span>
 		</td>
       </tr>
 	  </div>
@@ -452,7 +463,7 @@ $control.setTemplate("home:navigation.vm")
 <script language="javascript">
 <!--
 	changeDisplay('mysqlSourcing','table-row')
-	changeDisplay('oracleSourcing','none')
+	changeDisplay('kafkaSourcing','none')
 	changeDisplay('localSourcing','none')
 	
 	changeDisplay('memoryStorage','table-row')
