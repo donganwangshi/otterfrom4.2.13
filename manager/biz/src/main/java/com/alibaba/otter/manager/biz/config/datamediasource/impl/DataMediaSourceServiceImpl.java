@@ -201,7 +201,9 @@ public class DataMediaSourceServiceImpl implements DataMediaSourceService {
                 dataMediaSourceDo.setProperties(JsonUtils.marshalToString((DbMediaSource) dataMediaSource));
             } else if (dataMediaSource instanceof MqMediaSource) {
                 dataMediaSourceDo.setProperties(JsonUtils.marshalToString((MqMediaSource) dataMediaSource));
-            } else if (dataMediaSourceDo.getType().isElasticSearch() ) {
+            } else if (dataMediaSource instanceof KafkaMediaSource) {
+                dataMediaSourceDo.setProperties(JsonUtils.marshalToString((KafkaMediaSource) dataMediaSource));
+            }else if (dataMediaSourceDo.getType().isElasticSearch() ) {
                 dataMediaSource = JsonUtils.unmarshalFromString(dataMediaSourceDo.getProperties(), ElasticSearchMediaSource.class);
             } else if (dataMediaSourceDo.getType().isCassandra()) {
                 dataMediaSource = JsonUtils.unmarshalFromString(dataMediaSourceDo.getProperties(), CassandraMediaSource.class);
@@ -210,7 +212,8 @@ public class DataMediaSourceServiceImpl implements DataMediaSourceService {
             } else if (dataMediaSourceDo.getType().isHDFSArvo() ) {
                 dataMediaSource = JsonUtils.unmarshalFromString(dataMediaSourceDo.getProperties(), HDFSMediaSource.class);
             } else if (dataMediaSourceDo.getType().isKafka()) {
-                dataMediaSource = JsonUtils.unmarshalFromString(dataMediaSourceDo.getProperties(), KafkaMediaSource.class);
+//                dataMediaSource = JsonUtils.unmarshalFromString(dataMediaSourceDo.getProperties(), KafkaMediaSource.class);
+            	dataMediaSourceDo.setProperties(JsonUtils.marshalToString((KafkaMediaSource) dataMediaSource));
             }else if (dataMediaSourceDo.getType().isMq()) {
                 dataMediaSource = JsonUtils.unmarshalFromString(dataMediaSourceDo.getProperties(), MqMediaSource.class);
             }

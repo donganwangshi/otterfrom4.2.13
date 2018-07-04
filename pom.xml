@@ -222,7 +222,7 @@
 				<artifactId>greenplum</artifactId>
 				<version>5.1.4</version>
 				<scope>system</scope>
-				<systemPath>lib/greenplum.jar</systemPath>
+				<systemPath>/lib/greenplum.jar</systemPath>
 			</dependency>
 			<!-- elasticsearch -->
 			<dependency>
@@ -314,7 +314,7 @@
 				<artifactId>ojdbc14</artifactId>
 				<version>10.2.0.3.0</version>
 				<scope>system</scope>
-				<systemPath>lib/ojdbc14-10.2.0.3.0.jar</systemPath>
+				<systemPath>/lib/ojdbc14-10.2.0.3.0.jar</systemPath>
 			</dependency>
 			<!-- spring -->
 			<dependency>

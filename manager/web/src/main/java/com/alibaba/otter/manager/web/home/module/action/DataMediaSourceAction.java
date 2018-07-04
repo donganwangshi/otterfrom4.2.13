@@ -37,6 +37,7 @@ import com.alibaba.otter.shared.common.model.config.data.hbase.HBaseMediaSource;
 import com.alibaba.otter.shared.common.model.config.data.hdfs.HDFSMediaSource;
 import com.alibaba.otter.shared.common.model.config.data.kafka.KafkaMediaSource;
 import com.alibaba.otter.shared.common.model.config.data.mq.MqMediaSource;
+import com.alibaba.rocketmq.shade.com.alibaba.fastjson.JSON;
 
 public class DataMediaSourceAction extends AbstractAction {
 
@@ -56,8 +57,10 @@ public class DataMediaSourceAction extends AbstractAction {
     public void doAdd(@FormGroup("dataMediaSourceInfo") Group dataMediaSourceInfo,
                       @FormField(name = "formDataMediaSourceError", group = "dataMediaSourceInfo") CustomErrors err,
                       Navigator nav) throws Exception {
+    	 System.out.println(String.format("dataMediaSourceInfo: %s", JSON.toJSONString(dataMediaSourceInfo)));
         DataMediaSource dataMediaSource = new DataMediaSource();
         dataMediaSourceInfo.setProperties(dataMediaSource);
+   	    System.out.println(String.format("dataMediaSource: %s", JSON.toJSONString(dataMediaSource)));
 
         if (dataMediaSource.getType().isMysql() || dataMediaSource.getType().isOracle()||dataMediaSource.getType().isGreenplum()) {
             DbMediaSource dbMediaSource = new DbMediaSource();
@@ -123,6 +126,8 @@ public class DataMediaSourceAction extends AbstractAction {
         }else if (dataMediaSource.getType().isKafka()){
         	KafkaMediaSource mqMediaSource = new KafkaMediaSource();
             dataMediaSourceInfo.setProperties(mqMediaSource);
+            
+            System.out.println(String.format("mqMediaSource: %s", JSON.toJSONString(mqMediaSource)));
             try {
                 dataMediaSourceService.create(mqMediaSource);
             } catch (RepeatConfigureException rce) {

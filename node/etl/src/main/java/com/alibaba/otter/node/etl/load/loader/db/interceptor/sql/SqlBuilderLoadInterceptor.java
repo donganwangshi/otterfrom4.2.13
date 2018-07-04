@@ -26,6 +26,7 @@ import com.alibaba.otter.node.etl.common.db.dialect.SqlTemplate;
 import com.alibaba.otter.node.etl.common.db.dialect.oracle.OracleSqlTemplate;
 import com.alibaba.otter.node.etl.load.loader.db.context.DbLoadContext;
 import com.alibaba.otter.node.etl.load.loader.interceptor.AbstractLoadInterceptor;
+import com.alibaba.otter.shared.common.model.config.data.DataMediaSource;
 import com.alibaba.otter.shared.common.model.config.data.db.DbMediaSource;
 import com.alibaba.otter.shared.etl.model.EventColumn;
 import com.alibaba.otter.shared.etl.model.EventData;
@@ -42,6 +43,11 @@ public class SqlBuilderLoadInterceptor extends AbstractLoadInterceptor<DbLoadCon
     private DbDialectFactory dbDialectFactory;
 
     public boolean before(DbLoadContext context, EventData currentData) {
+    	DataMediaSource dataMediaSource = context.getDataMediaSource();
+    	if(dataMediaSource.getType().isKafka()){
+    		//beforeForKafka(context,currentData);
+    		return false;
+    	}
         // 初步构建sql
         DbDialect dbDialect = dbDialectFactory.getDbDialect(context.getIdentity().getPipelineId(),
             (DbMediaSource) context.getDataMediaSource());

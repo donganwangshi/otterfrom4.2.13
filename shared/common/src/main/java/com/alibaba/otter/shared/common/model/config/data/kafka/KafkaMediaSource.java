@@ -17,11 +17,21 @@ public class KafkaMediaSource extends DataMediaSource {
 	private String zookeeperConnect;
 	private long batchSize=128000L;
 	private long bufferMemory=97108864L;
+	private String url;
 	
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	
+
+	public String getUrl() {
+		return url;
+	}
 
 
 	public String getBootstrapServers() {
-		return bootstrapServers;
+		 return url;
+		//return bootstrapServers;
 	}
 
 	public void setBootstrapServers(String bootstrapServers) {
