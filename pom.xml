@@ -250,6 +250,16 @@
 				<groupId>org.apache.hbase</groupId>
 				<artifactId>hbase-shaded-server</artifactId>
 				<version>1.1.5</version>
+				<exclusions>
+					<exclusion>
+						 <groupId>org.slf4j</groupId>
+      					 <artifactId>slf4j-api</artifactId>
+					</exclusion>
+					<exclusion>
+						  <groupId>log4j</groupId>
+      					  <artifactId>log4j</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<!-- HDFS-arvo -->
 			<dependency>
@@ -271,6 +281,14 @@
 						<artifactId>guava</artifactId>
 						<groupId>com.google.guava</groupId>
 					</exclusion>
+					<exclusion>
+						 <groupId>org.slf4j</groupId>
+      					 <artifactId>slf4j-api</artifactId>
+					</exclusion>
+					<exclusion>
+						  <groupId>log4j</groupId>
+      					  <artifactId>log4j</artifactId>
+					</exclusion>
 				</exclusions>
 			</dependency>
 			<dependency>
@@ -282,6 +300,14 @@
 						<artifactId>guava</artifactId>
 						<groupId>com.google.guava</groupId>
 					</exclusion>
+					<exclusion>
+						 <groupId>org.slf4j</groupId>
+      					 <artifactId>slf4j-api</artifactId>
+					</exclusion>
+					<exclusion>
+						  <groupId>log4j</groupId>
+      					  <artifactId>log4j</artifactId>
+					</exclusion>
 				</exclusions>
 			</dependency>
 			<!-- Kafka -->
@@ -289,6 +315,20 @@
 				<groupId>org.apache.kafka</groupId>
 				<artifactId>kafka_2.11</artifactId>
 				<version>0.10.1.1</version>
+				<exclusions>
+					<exclusion>
+						<artifactId>guava</artifactId>
+						<groupId>com.google.guava</groupId>
+					</exclusion>
+					<exclusion>
+						 <groupId>org.slf4j</groupId>
+      					 <artifactId>slf4j-api</artifactId>
+					</exclusion>
+					<exclusion>
+						  <groupId>log4j</groupId>
+      					  <artifactId>log4j</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			
 			<!-- Cassandra -->
