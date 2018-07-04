@@ -110,6 +110,12 @@
 		<dependency>
 			<groupId>com.github.sgroschupf</groupId>
 			<artifactId>zkclient</artifactId>
+			<exclusions>
+				<exclusion>
+						  <groupId>log4j</groupId>
+      					  <artifactId>log4j</artifactId>
+					</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>

@@ -193,9 +193,10 @@ public class KafkaSelector implements OtterSelector<EventData> {
 		
 	}
 
+	/*todo: */
 	@Override
 	public Long lastEntryTime() {
-		return null;
+		return 0L;
 	}
 
 

@@ -51,6 +51,12 @@ $control.setTemplate("home:navigation.vm")
   <tr>
   <th>本地localBinlog目录：</th><td>$!canal.canalParameter.localBinlogDirectory</td>
   </tr>
+  
+  #if($!canal.canalParameter.sourcingType.isKafka())
+  <tr>
+  <th>kafka的topic：</th><td>$!canal.canalParameter.kafkaTopicList</td>
+  </tr>
+  
   #end
   
   <tr>

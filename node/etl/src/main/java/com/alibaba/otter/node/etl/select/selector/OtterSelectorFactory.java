@@ -47,12 +47,11 @@ public class OtterSelectorFactory {
     public OtterSelector getSelector(Long pipelineId) {
     	
     	Pipeline pipeline= configClientService.findPipeline(pipelineId);
-    	
     	String  destination = pipeline.getParameters().getDestinationName();
     	Canal canal = canalConfigClient.findCanal(destination);
+    	
     	//String brokerServer =  canal.getCanalParameter().getDbAddresses();
     	List<List<DataSourcing>> groupDbAddresses =  canal.getCanalParameter().getGroupDbAddresses();
-    	
     	if(canal.getCanalParameter().getSourcingType().isKafka()){
     		String  topicList = canal.getCanalParameter().getKafkaTopicList();
     		DataSourcing dataSourcing = groupDbAddresses.get(0).get(0);

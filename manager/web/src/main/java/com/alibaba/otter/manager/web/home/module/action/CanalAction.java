@@ -61,6 +61,9 @@ public class CanalAction extends AbstractAction {
         CanalParameter parameter = new CanalParameter();
         canalInfo.setProperties(canal);
         canalParameterInfo.setProperties(parameter);
+        System.out.println(String.format("canalParameterInfo: %s", com.alibaba.fastjson.JSON.toJSONString(canalParameterInfo)));
+        System.out.println(String.format("parameter: %s", com.alibaba.fastjson.JSON.toJSONString(parameter)));
+
 
         String zkClustersString = canalParameterInfo.getField("zkClusters").getStringValue();
         String[] zkClusters = StringUtils.split(zkClustersString, ";");
