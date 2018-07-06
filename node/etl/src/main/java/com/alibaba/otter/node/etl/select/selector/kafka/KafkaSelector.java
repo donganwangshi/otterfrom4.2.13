@@ -26,6 +26,7 @@ import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.alibaba.otter.node.common.redis.RedisClient;
 import com.alibaba.otter.node.etl.select.selector.Message;
 import com.alibaba.otter.node.etl.select.selector.OtterSelector;
 import com.alibaba.otter.shared.arbitrate.ArbitrateEventService;
@@ -42,8 +43,6 @@ public class KafkaSelector implements OtterSelector<EventData> {
     
     private volatile boolean running = false;
 
-	private  LinkedBlockingDeque<ConsumerRecord<String, String>> buffer = new LinkedBlockingDeque<ConsumerRecord<String, String>>();
-	
 	private KafkaConsumer<String, String> consumer =null ;
 	
 	private ArbitrateEventService arbitrateEventService;
@@ -58,22 +57,21 @@ public class KafkaSelector implements OtterSelector<EventData> {
 	
 	private AtomicLong  batchId = new AtomicLong(0) ;
 	
-    private final Map<TopicPartition, OffsetAndMetadata> offsets = new HashMap<>();
     
     private ConcurrentHashMap<Long, ConsumerRecords<String, String>> recordsMap = new ConcurrentHashMap<Long, ConsumerRecords<String, String>>();
 
     private OffsetManager  offsetManager;
 	
-	public KafkaSelector(String brokerServer,String destination,Pipeline pipeline,String topic){
+	public KafkaSelector(String brokerServer,String destination,Pipeline pipeline,String topic,RedisClient redisClient){
 		this.brokerServer = brokerServer;
 		this.destination = destination;
 		this.pipeline =pipeline;
 		this.topic = topic;
-		this.offsetManager = new OffsetManager(destination+"_"+pipeline.getName());
+		this.offsetManager = new OffsetManager(redisClient, destination+"_"+pipeline.getName());
 		
 	}
 	
-	private void singleMainStemStatus(){
+	private void setMainStemStatus(){
 		MainStemEventData mainStemData = new MainStemEventData();
         mainStemData.setPipelineId(this.pipeline.getId());
         mainStemData.setStatus(MainStemEventData.Status.OVERTAKE);
@@ -111,7 +109,7 @@ public class KafkaSelector implements OtterSelector<EventData> {
 		consumer.subscribe(Arrays.asList(this.topic.split(",")),
 				new OffsetTrackingRebalanceListener(consumer, offsetManager));
 		
-		this.singleMainStemStatus();
+		this.setMainStemStatus();
 		running = true;
 		
 	}

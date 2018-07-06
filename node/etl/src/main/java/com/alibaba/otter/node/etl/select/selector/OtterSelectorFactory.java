@@ -25,6 +25,7 @@ import com.alibaba.otter.canal.extend.communication.CanalConfigClient;
 import com.alibaba.otter.canal.instance.manager.model.Canal;
 import com.alibaba.otter.canal.instance.manager.model.CanalParameter.DataSourcing;
 import com.alibaba.otter.node.common.config.ConfigClientService;
+import com.alibaba.otter.node.common.redis.RedisClient;
 import com.alibaba.otter.node.etl.OtterContextLocator;
 import com.alibaba.otter.node.etl.select.selector.canal.CanalEmbedSelector;
 import com.alibaba.otter.node.etl.select.selector.kafka.KafkaSelector;
@@ -44,6 +45,8 @@ public class OtterSelectorFactory {
 	
 	private CanalConfigClient canalConfigClient;
 	
+	private RedisClient redisClient;
+	
     public OtterSelector getSelector(Long pipelineId) {
     	
     	Pipeline pipeline= configClientService.findPipeline(pipelineId);
@@ -57,7 +60,7 @@ public class OtterSelectorFactory {
     		DataSourcing dataSourcing = groupDbAddresses.get(0).get(0);
     		String host = dataSourcing.getDbAddress().getHostString();
     		int port = dataSourcing.getDbAddress().getPort();
-    		KafkaSelector selector = new KafkaSelector(host+":"+port,destination,pipeline,topicList);
+    		KafkaSelector selector = new KafkaSelector(host+":"+port,destination,pipeline,topicList,redisClient);
             OtterContextLocator.autowire(selector);
     		return selector;
     	}else{
@@ -78,5 +81,12 @@ public class OtterSelectorFactory {
     public void setCanalConfigClient(CanalConfigClient canalConfigClient) {
         this.canalConfigClient = canalConfigClient;
     }
+	public RedisClient getRedisClient() {
+		return redisClient;
+	}
+	public void setRedisClient(RedisClient redisClient) {
+		this.redisClient = redisClient;
+	}
+    
 
 }
