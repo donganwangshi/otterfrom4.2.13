@@ -13,6 +13,11 @@
 	<url>http://github.com/alibaba/otter</url>
 	<dependencies>
 		<dependency>
+		    <groupId>redis.clients</groupId>
+		    <artifactId>jedis</artifactId>
+		    <version>2.7.2</version>
+		</dependency>
+		<dependency>
 			<groupId>com.alibaba.otter</groupId>
 			<artifactId>shared.common</artifactId>
 			<version>${project.version}</version>
